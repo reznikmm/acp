@@ -13,6 +13,7 @@ compatibility does not introduce an MCP crate dependency.
 - `testsuite/`: Separate test suite crate
 - `demos/server/`: Ada stdio echo agent with in-memory sessions
 - `demos/client/`: Ada client, Bash launcher and integration tests
+- `demos/codex/`: Ada client for the external Codex ACP v2 adapter
 - `demos/common/`: Shared stdio, JSON helpers and generated codec adapters
 - `config/`: Build-time configuration artifacts written by Alire (do not edit manually)
 - `.obj/`, `.lib/`: Build outputs (do not edit manually)
@@ -53,6 +54,11 @@ Run from repository root unless noted otherwise.
 - Format the demos after Ada edits:
   - `alr -C demos/server exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_server_demo.gpr`
   - `alr -C demos/client exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_client_demo.gpr`
+  - `alr -C demos/codex exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_codex_demo.gpr`
+- Build and test the Codex demo without model access:
+  - `alr -C demos/codex build`
+  - `alr -C demos/codex test`
+  - For live runs, install the adapter and log in as described in `demos/codex/README.md`.
 
 ## Change Workflow For Agents
 
@@ -60,7 +66,7 @@ Run from repository root unless noted otherwise.
 2. Implement the smallest viable patch.
 3. Re-run compile check for touched units.
 4. Run targeted runtime/test command when behavior changes.
-   Rebuild both demos for changes in `demos/common/`.
+   Rebuild all demos for changes in `demos/common/`.
 5. Report exactly what changed and what was validated.
 
 ## Ada-Specific Notes

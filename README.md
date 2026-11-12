@@ -95,6 +95,17 @@ alr -C demos/client test
 The demos use Bash/jq for orchestration and tests. See
 [demos/README.md](demos/README.md) for requirements and scope.
 
+The [Codex demo](demos/codex/README.md) connects an Ada client to the external
+`@agentclientprotocol/codex-acp` adapter, assembles streamed text and waits for
+ACP v2 foreground completion:
+
+```sh
+# Install the adapter and log in first; see demos/codex/README.md.
+alr -C demos/codex build
+./demos/codex/run.sh "Скажи коротко українською, що таке Ada."
+alr -C demos/codex test
+```
+
 ## Maintainer and license
 
 [Max Reznik](https://github.com/reznikmm).

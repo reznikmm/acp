@@ -1,11 +1,12 @@
 # ACP v2 stdio demos
 
-Two independent Ada executables demonstrate both sides of the generated binding:
+The Ada executables demonstrate both sides of the generated binding:
 
 | Directory | Role |
 | --- | --- |
 | [server](server/README.md) | In-memory echo agent with baseline session methods |
 | [client](client/README.md) | Client performing initialization, session setup and a prompt |
+| [codex](codex/README.md) | Client using the external Codex ACP adapter and streamed replies |
 | `common/` | Shared stdio framing, JSON helpers and generated codec adapters |
 
 From the repository root:
@@ -42,21 +43,22 @@ The client handles updates both before and after the response and waits for
 
 Alire, an Ada 2022 compiler, Bash, GNU `timeout`, jq and standard POSIX utilities
 are required. The demos are tested on Linux. No Python or MCP crate is needed.
-Build both demos before running their tests:
+Build both echo demos before running their tests:
 
 ```sh
 alr -C demos/server test
 alr -C demos/client test
 ```
 
-The Bash/jq tests exercise the actual executables, generated values, lifecycle
-errors, notifications, Unicode, empty and large text, reordered replies,
+The echo demos' Bash/jq tests exercise the actual executables, generated values,
+lifecycle errors, notifications, Unicode, empty and large text, reordered replies,
 malformed messages, EOF, size limits and timeout cleanup.
 
 ## Scope and provenance
 
-Sessions last only for the lifetime of the agent process. There is no model,
-authentication, MCP server connection, background work or durable history.
+In the echo demos, sessions last only for the lifetime of the agent process.
+There is no model, authentication, MCP server connection, background work or
+durable history.
 Prompt handling is synchronous, so cancellation notifications cannot interrupt
 an echo already being processed. Baseline text and resource links are supported;
 image/audio and other optional session extensions are not advertised.
@@ -67,4 +69,9 @@ not a complete protocol validator or reusable ACP runtime API.
 
 The shared stdio implementation and Bash launcher were copied from this
 workspace's Ada MCP demos; they introduce no runtime dependency on MCP.
-All demo files use Apache-2.0 WITH LLVM-exception, as marked in their sources.
+The Codex example has separate [installation and run instructions](codex/README.md).
+It requires Node.js and an external adapter; its offline tests do not call a
+model.
+
+All repository demo files use Apache-2.0 WITH LLVM-exception, as marked in their
+sources.
