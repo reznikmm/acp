@@ -1,0 +1,4 @@
+{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":2,"info":{"name":"example-client","version":"0.1.0"}}}
+{"jsonrpc":"2.0","id":"new","method":"session/new","params":{"cwd":"/"}}
+{"jsonrpc":"2.0","id":"prompt","method":"session/prompt","params":{"sessionId":"session-1","prompt":[{"type":"text","text":"Привіт з Ada!"}]}}
+{"jsonrpc":"2.0","id":"close","method":"session/close","params":{"sessionId":"session-1"}}

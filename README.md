@@ -15,8 +15,9 @@ The binding is generated from the upstream schema at commit
 - `ACP.Types.Outputs`: `Output_<Type>` procedures using VSS JSON content handlers.
 - `ACP.Key_Lookups`: the key lookup generic used by generated readers.
 
-This is the protocol data binding layer. Connection lifecycle, method dispatch
-and session state are not implemented yet. Readers are not full schema validators.
+This is the protocol data binding layer. Separate demos implement a minimal
+client/agent lifecycle; reusable runtime APIs are not implemented yet.
+Readers are not full schema validators.
 See [schema/README.md](schema/README.md) for mapping limitations and regeneration.
 
 ## Relationship to MCP
@@ -76,6 +77,23 @@ complete in-memory conversion examples.
 Open unions and updates with patch semantics currently use JSON event storage.
 For example, `ToolCallUpdate` preserves the difference between an omitted title
 and `"title":null`, and `ContentBlock` preserves ACP's future/custom variants.
+
+## Client and server demos
+
+The [Ada client](demos/client/README.md) initializes a connection, creates a
+session and submits text to the [echo agent](demos/server/README.md). It receives
+output and foreground state through `session/update` and closes the session.
+
+```sh
+alr -C demos/server build
+alr -C demos/client build
+./demos/client/run.sh "Привіт з Ada!"
+alr -C demos/server test
+alr -C demos/client test
+```
+
+The demos use Bash/jq for orchestration and tests. See
+[demos/README.md](demos/README.md) for requirements and scope.
 
 ## Maintainer and license
 

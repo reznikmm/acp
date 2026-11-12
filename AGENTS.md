@@ -11,6 +11,9 @@ compatibility does not introduce an MCP crate dependency.
 - `source/`: Core library logic (`ACP.*` packages)
 - `schema/`: Pinned upstream schema, jq preparation, generator script and notes
 - `testsuite/`: Separate test suite crate
+- `demos/server/`: Ada stdio echo agent with in-memory sessions
+- `demos/client/`: Ada client, Bash launcher and integration tests
+- `demos/common/`: Shared stdio, JSON helpers and generated codec adapters
 - `config/`: Build-time configuration artifacts written by Alire (do not edit manually)
 - `.obj/`, `.lib/`: Build outputs (do not edit manually)
 
@@ -24,6 +27,7 @@ compatibility does not introduce an MCP crate dependency.
 - Do not add an MCP dependency to the core crate; see `schema/MCP_INTEROP.md`.
 - Regenerate `source/acp-types*.ad[sb]` instead of editing generated units.
 - Preserve patch semantics: omission, null and empty values can be distinct.
+- Keep demo protocol stdout limited to JSON-RPC messages; report to stderr.
 
 ## Build And Test Commands
 
@@ -40,6 +44,15 @@ Run from repository root unless noted otherwise.
 - Regenerate using an explicit VSS generator executable (Bash and jq required):
   - `./schema/generate.sh /absolute/path/to/gen_json`
   - Follow `schema/README.md` for generator prerequisites and mapping limits.
+- Build both demos and run their Bash/jq integration tests:
+  - `alr -C demos/server build`
+  - `alr -C demos/client build`
+  - `./demos/client/run.sh "Привіт з Ada!"`
+  - `alr -C demos/server test`
+  - `alr -C demos/client test`
+- Format the demos after Ada edits:
+  - `alr -C demos/server exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_server_demo.gpr`
+  - `alr -C demos/client exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_client_demo.gpr`
 
 ## Change Workflow For Agents
 
@@ -47,6 +60,7 @@ Run from repository root unless noted otherwise.
 2. Implement the smallest viable patch.
 3. Re-run compile check for touched units.
 4. Run targeted runtime/test command when behavior changes.
+   Rebuild both demos for changes in `demos/common/`.
 5. Report exactly what changed and what was validated.
 
 ## Ada-Specific Notes
