@@ -4,6 +4,7 @@
 ------------------------------------------------------------------
 
 with "config/acp_config.gpr";
+with "vss_json";
 project ACP is
 
    for Library_Name use "acp";

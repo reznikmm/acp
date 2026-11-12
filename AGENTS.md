@@ -2,11 +2,14 @@
 
 ## Purpose
 
-ACP is an Ada library for Agent Client Protocol.
+ACP is an Ada 2022 data binding for the Agent Client Protocol v2 draft.
+It generates independent ACP types and JSON converters; MCP wire-content
+compatibility does not introduce an MCP crate dependency.
 
 ## Repository Map
 
 - `source/`: Core library logic (`ACP.*` packages)
+- `schema/`: Pinned upstream schema, jq preparation, generator script and notes
 - `testsuite/`: Separate test suite crate
 - `config/`: Build-time configuration artifacts written by Alire (do not edit manually)
 - `.obj/`, `.lib/`: Build outputs (do not edit manually)
@@ -17,6 +20,10 @@ ACP is an Ada library for Agent Client Protocol.
    (one exception is `Libadalang.Common.Property_Error`).
 - Don't introduce extra (sub-)type conversions, like Integer to Natural.
 - Preserve existing style and naming conventions in nearby code. Don't use abbreviations.
+- Keep protocol logic in Ada and use Bash/jq for generation and simple tooling.
+- Do not add an MCP dependency to the core crate; see `schema/MCP_INTEROP.md`.
+- Regenerate `source/acp-types*.ad[sb]` instead of editing generated units.
+- Preserve patch semantics: omission, null and empty values can be distinct.
 
 ## Build And Test Commands
 
@@ -30,6 +37,9 @@ Run from repository root unless noted otherwise.
   - `alr exec -- gnatformat --charset=utf-8 --no-subprojects -P acp.gpr`
 - Build and run testsuite:
   - `alr -C testsuite/ run`
+- Regenerate using an explicit VSS generator executable (Bash and jq required):
+  - `./schema/generate.sh /absolute/path/to/gen_json`
+  - Follow `schema/README.md` for generator prerequisites and mapping limits.
 
 ## Change Workflow For Agents
 
