@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: 2026 Max Reznik <reznikmm@gmail.com>
+#
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+
+name = "acp_claude_demo"
+description = "Ada ACP v2 client for the Claude Code ACP adapter"
+version = "0.1.0-dev"
+licenses = "Apache-2.0 WITH LLVM-exception"
+executables = ["acp_claude_demo"]
+
+[build-switches]
+"*".Ada_Version = "Ada2022"
+development.style_checks = ["-gnaty", "-gnaty-B"]
+
+[build-profiles]
+acp = "development"
+
+[[depends-on]]
+acp = "*"
+
+[[pins]]
+acp = { path = "../.." }
+
+[[actions]]
+type = "test"
+command = ["bash", "test.sh"]

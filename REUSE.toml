@@ -4,7 +4,7 @@ SPDX-PackageSupplier = "Max Reznik <reznikmm@gmail.com>"
 SPDX-PackageDownloadLocation = "https://github.com/reznikmm/acp"
 
 [[annotations]]
-path = ["README.md", "alire.toml", "AGENTS.md", "schema/README.md", "schema/MCP_INTEROP.md", "demos/README.md", "demos/server/README.md", "demos/client/README.md", "demos/codex/README.md", "demos/server/requests.jsonl"]
+path = ["README.md", "alire.toml", "AGENTS.md", "schema/README.md", "schema/MCP_INTEROP.md", "demos/README.md", "demos/server/README.md", "demos/client/README.md", "demos/codex/README.md", "demos/claude/README.md", "demos/server/requests.jsonl"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Max Reznik <reznikmm@gmail.com>"
 SPDX-License-Identifier = "Apache-2.0 WITH LLVM-exception"

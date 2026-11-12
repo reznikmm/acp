@@ -106,6 +106,17 @@ alr -C demos/codex build
 alr -C demos/codex test
 ```
 
+The [Claude Code demo](demos/claude/README.md) uses the same Ada streaming client
+with `claude-agent-acp`. Its Linux standalone adapter needs no Node.js and
+inherits an exported `CLAUDE_CODE_OAUTH_TOKEN`:
+
+```sh
+./demos/claude/install.sh
+alr -C demos/claude build
+./demos/claude/run.sh "Скажи коротко українською, що таке Ada."
+alr -C demos/claude test
+```
+
 ## Maintainer and license
 
 [Max Reznik](https://github.com/reznikmm).

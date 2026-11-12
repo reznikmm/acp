@@ -14,7 +14,9 @@ compatibility does not introduce an MCP crate dependency.
 - `demos/server/`: Ada stdio echo agent with in-memory sessions
 - `demos/client/`: Ada client, Bash launcher and integration tests
 - `demos/codex/`: Ada client for the external Codex ACP v2 adapter
+- `demos/claude/`: Ada client for Claude Code, standalone adapter installer
 - `demos/common/`: Shared stdio, JSON helpers and generated codec adapters
+  and the streaming prompt client used by Codex/Claude
 - `config/`: Build-time configuration artifacts written by Alire (do not edit manually)
 - `.obj/`, `.lib/`: Build outputs (do not edit manually)
 
@@ -55,10 +57,17 @@ Run from repository root unless noted otherwise.
   - `alr -C demos/server exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_server_demo.gpr`
   - `alr -C demos/client exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_client_demo.gpr`
   - `alr -C demos/codex exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_codex_demo.gpr`
+  - `alr -C demos/claude exec -- gnatformat --charset=utf-8 --no-subprojects -P acp_claude_demo.gpr`
 - Build and test the Codex demo without model access:
   - `alr -C demos/codex build`
   - `alr -C demos/codex test`
   - For live runs, install the adapter and log in as described in `demos/codex/README.md`.
+- Build and test the Claude demo without model access:
+  - `alr -C demos/claude build`
+  - `alr -C demos/claude test`
+  - `./demos/claude/install.sh` installs the pinned native adapter locally.
+  - For live runs, use the existing Claude login or exported OAuth token;
+    see `demos/claude/README.md`. Never print or commit credentials.
 
 ## Change Workflow For Agents
 

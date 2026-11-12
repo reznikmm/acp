@@ -7,6 +7,7 @@ The Ada executables demonstrate both sides of the generated binding:
 | [server](server/README.md) | In-memory echo agent with baseline session methods |
 | [client](client/README.md) | Client performing initialization, session setup and a prompt |
 | [codex](codex/README.md) | Client using the external Codex ACP adapter and streamed replies |
+| [claude](claude/README.md) | Client using the external Claude Code ACP adapter and streamed replies |
 | `common/` | Shared stdio framing, JSON helpers and generated codec adapters |
 
 From the repository root:
@@ -72,6 +73,10 @@ workspace's Ada MCP demos; they introduce no runtime dependency on MCP.
 The Codex example has separate [installation and run instructions](codex/README.md).
 It requires Node.js and an external adapter; its offline tests do not call a
 model.
+
+The [Claude Code example](claude/README.md) uses a standalone adapter with the
+same `Demo.Prompt_Client` procedure as Codex. Its Linux installer requires no
+Node.js. Both examples reuse the Bash FIFO launcher in `client/`.
 
 All repository demo files use Apache-2.0 WITH LLVM-exception, as marked in their
 sources.

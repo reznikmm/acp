@@ -10,7 +10,9 @@ Ada client <-- ACP v2 / stdio --> codex-acp <-- app-server --> Codex
 ```
 
 The client uses this repository's generated request, response, notification and
-content-chunk converters. No MCP dependency or Python is required. Node.js is
+content-chunk converters. Its `Demo.Prompt_Client` procedure in `../common/` is
+also used by the [Claude Code demo](../claude/README.md).
+No MCP dependency or Python is required. Node.js is
 needed by the external adapter, not by the Ada library.
 
 ## Install and run
